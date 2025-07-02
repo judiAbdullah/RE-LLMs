@@ -1,0 +1,6 @@
+experiment_scripts/__pycache__/
+seq_generator_model/__pycache__/
+seq_generator_model/java_model/__pycache__/
+seq_generator_model/python_model/__pycache__/
+__pycache__/
+visualization/*.jpg

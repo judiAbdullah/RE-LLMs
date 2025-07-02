@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CompilationUnit value="class Test {      public static void my_method() {         if (x.check(x)) {             System.out.println(&quot;x&quot;);             if (2) {                 System.out.println(&quot;x&quot;);             } else {                 return;             }         } else if (obj.func()) {             return;         }         // switch (value) {         //     case 1:         //         System.out.println(&quot;Matched 1&quot;);         //         break;         //     case 2:         //         System.out.println(&quot;Matched 2&quot;);         //         break;         //     default:         //         if (value == 3) {         //             System.out.println(&quot;Matched 3&quot;);         //         }         // }         // TestClass obj = new Class1();         // for (int x : new int[]{1, 2, 3, 4}) {         //     obj.method(x);         // }         // try {         //     System.out.println(&quot;try body&quot;);         // } catch (Exception e) {         //     System.out.println(e.getMessage());         // } finally {         //     System.out.println(&quot;finally&quot;);         // }     } } ">
+    <ClassOrInterfaceDeclaration value="class Test {      public static void my_method() {         if (x.check(x)) {             System.out.println(&quot;x&quot;);             if (2) {                 System.out.println(&quot;x&quot;);             } else {                 return;             }         } else if (obj.func()) {             return;         }         // switch (value) {         //     case 1:         //         System.out.println(&quot;Matched 1&quot;);         //         break;         //     case 2:         //         System.out.println(&quot;Matched 2&quot;);         //         break;         //     default:         //         if (value == 3) {         //             System.out.println(&quot;Matched 3&quot;);         //         }         // }         // TestClass obj = new Class1();         // for (int x : new int[]{1, 2, 3, 4}) {         //     obj.method(x);         // }         // try {         //     System.out.println(&quot;try body&quot;);         // } catch (Exception e) {         //     System.out.println(e.getMessage());         // } finally {         //     System.out.println(&quot;finally&quot;);         // }     } }">
+        <SimpleName value="Test"/>
+        <MethodDeclaration value="public static void my_method() {     if (x.check(x)) {         System.out.println(&quot;x&quot;);         if (2) {             System.out.println(&quot;x&quot;);         } else {             return;         }     } else if (obj.func()) {         return;     }     // switch (value) {     //     case 1:     //         System.out.println(&quot;Matched 1&quot;);     //         break;     //     case 2:     //         System.out.println(&quot;Matched 2&quot;);     //         break;     //     default:     //         if (value == 3) {     //             System.out.println(&quot;Matched 3&quot;);     //         }     // }     // TestClass obj = new Class1();     // for (int x : new int[]{1, 2, 3, 4}) {     //     obj.method(x);     // }     // try {     //     System.out.println(&quot;try body&quot;);     // } catch (Exception e) {     //     System.out.println(e.getMessage());     // } finally {     //     System.out.println(&quot;finally&quot;);     // } }">
+            <Modifier value="public "/>
+            <Modifier value="static "/>
+            <SimpleName value="my_method"/>
+            <VoidType value="void"/>
+            <BlockStmt value="{     if (x.check(x)) {         System.out.println(&quot;x&quot;);         if (2) {             System.out.println(&quot;x&quot;);         } else {             return;         }     } else if (obj.func()) {         return;     }     // switch (value) {     //     case 1:     //         System.out.println(&quot;Matched 1&quot;);     //         break;     //     case 2:     //         System.out.println(&quot;Matched 2&quot;);     //         break;     //     default:     //         if (value == 3) {     //             System.out.println(&quot;Matched 3&quot;);     //         }     // }     // TestClass obj = new Class1();     // for (int x : new int[]{1, 2, 3, 4}) {     //     obj.method(x);     // }     // try {     //     System.out.println(&quot;try body&quot;);     // } catch (Exception e) {     //     System.out.println(e.getMessage());     // } finally {     //     System.out.println(&quot;finally&quot;);     // } }">
+                <IfStmt value="if (x.check(x)) {     System.out.println(&quot;x&quot;);     if (2) {         System.out.println(&quot;x&quot;);     } else {         return;     } } else if (obj.func()) {     return; }">
+                    <MethodCallExpr value="x.check(x)">
+                        <NameExpr value="x">
+                            <SimpleName value="x"/>
+                        </NameExpr>
+                        <SimpleName value="check"/>
+                        <NameExpr value="x">
+                            <SimpleName value="x"/>
+                        </NameExpr>
+                    </MethodCallExpr>
+                    <BlockStmt value="{     System.out.println(&quot;x&quot;);     if (2) {         System.out.println(&quot;x&quot;);     } else {         return;     } }">
+                        <ExpressionStmt value="System.out.println(&quot;x&quot;);">
+                            <MethodCallExpr value="System.out.println(&quot;x&quot;)">
+                                <FieldAccessExpr value="System.out">
+                                    <NameExpr value="System">
+                                        <SimpleName value="System"/>
+                                    </NameExpr>
+                                    <SimpleName value="out"/>
+                                </FieldAccessExpr>
+                                <SimpleName value="println"/>
+                                <StringLiteralExpr value="&quot;x&quot;"/>
+                            </MethodCallExpr>
+                        </ExpressionStmt>
+                        <IfStmt value="if (2) {     System.out.println(&quot;x&quot;); } else {     return; }">
+                            <IntegerLiteralExpr value="2"/>
+                            <BlockStmt value="{     System.out.println(&quot;x&quot;); }">
+                                <ExpressionStmt value="System.out.println(&quot;x&quot;);">
+                                    <MethodCallExpr value="System.out.println(&quot;x&quot;)">
+                                        <FieldAccessExpr value="System.out">
+                                            <NameExpr value="System">
+                                                <SimpleName value="System"/>
+                                            </NameExpr>
+                                            <SimpleName value="out"/>
+                                        </FieldAccessExpr>
+                                        <SimpleName value="println"/>
+                                        <StringLiteralExpr value="&quot;x&quot;"/>
+                                    </MethodCallExpr>
+                                </ExpressionStmt>
+                            </BlockStmt>
+                            <BlockStmt value="{     return; }">
+                                <ReturnStmt value="return;"/>
+                            </BlockStmt>
+                        </IfStmt>
+                    </BlockStmt>
+                    <IfStmt value="if (obj.func()) {     return; }">
+                        <MethodCallExpr value="obj.func()">
+                            <NameExpr value="obj">
+                                <SimpleName value="obj"/>
+                            </NameExpr>
+                            <SimpleName value="func"/>
+                        </MethodCallExpr>
+                        <BlockStmt value="{     return; }">
+                            <ReturnStmt value="return;"/>
+                        </BlockStmt>
+                    </IfStmt>
+                </IfStmt>
+                <LineComment value="// switch (value) { "/>
+                <LineComment value="//     case 1: "/>
+                <LineComment value="//         System.out.println(&quot;Matched 1&quot;); "/>
+                <LineComment value="//         break; "/>
+                <LineComment value="//     case 2: "/>
+                <LineComment value="//         System.out.println(&quot;Matched 2&quot;); "/>
+                <LineComment value="//         break; "/>
+                <LineComment value="//     default: "/>
+                <LineComment value="//         if (value == 3) { "/>
+                <LineComment value="//             System.out.println(&quot;Matched 3&quot;); "/>
+                <LineComment value="//         } "/>
+                <LineComment value="// } "/>
+                <LineComment value="// TestClass obj = new Class1(); "/>
+                <LineComment value="// for (int x : new int[]{1, 2, 3, 4}) { "/>
+                <LineComment value="//     obj.method(x); "/>
+                <LineComment value="// } "/>
+                <LineComment value="// try { "/>
+                <LineComment value="//     System.out.println(&quot;try body&quot;); "/>
+                <LineComment value="// } catch (Exception e) { "/>
+                <LineComment value="//     System.out.println(e.getMessage()); "/>
+                <LineComment value="// } finally { "/>
+                <LineComment value="//     System.out.println(&quot;finally&quot;); "/>
+                <LineComment value="// } "/>
+            </BlockStmt>
+        </MethodDeclaration>
+    </ClassOrInterfaceDeclaration>
+</CompilationUnit>
