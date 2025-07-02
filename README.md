@@ -1,41 +1,6 @@
-# sequence_diagram_re_engineering (new project)
+# LLM-Based Re-Engineering of Sequence Diagrams
 
 ## Auther: Judi Abdullah
-
-## notes for special cases spoted and how has been solved:
-
-- every where you find (<b> seq </b>) this is sequence diagram in JSON and (<b>seqs</b>) this is list of sequence for list of functions
-
-- in seq_drawer we added replacing ',' between function parameters with ' -' because the api cause error with having ',' in object name but we keep it sequence json
-
-- python seq plot has problem in plot in case eg:{'a':"1", 'b': 2}.items() but seq in correct
-
-- AST-unparsable samples seq_generation return special case of seq which is empty to be excluded in prapareData
-
-- not possible to determine from ast which kw has default known kw args come after *args{
-    ```
-    def example_function(pos_only1, pos_only2, /, args1, args2, args3, *args, kw1, kw2=None, kw3, kw4, **kwargs):
-    ```
-    }
-
-- special case: (args = defaultvalue => args=defaultvalue) fixed with regex
-
-- exclude title element from seq from evaluation: (fixed for python by pass function code and extract the exact function def)
-
-- exclude functions of subfunction call: excluded in prepare data using function defined in generator class
-
-- special casse in python seq string element we have "str\"str" need to be changed to "str'str"
-
-- newInstance in java is changed (from old version) to have the variable name included / we don't have this case in python since we can not distinguish between function call and object creation
-    ```
-    in java we create variable by type var; or type var = new tyep(); or type var = fun();
-    in python we don't add type before the variable so the model doesn't detect newInstance for example var = fun()
-    ```
-
-- cleanseq : is a case we train and test the model in a certain situation which is: we remove all unused scopedVariable elements from sequence <b> this one has been entairly excluded from seq, so no need to use this args any more </b>
-
-
-
 
 ## project structure
 
@@ -66,7 +31,7 @@
 - `visualization` contain some script to plot seq
 
 
-## requierments
+## Requirements
  - `environment.yml` file inlcude all necessary libs for running experiment add them to your env in any way you prefere or use it to create a new env <b>note: conda used</b>
 
 ## needed lib version special case
@@ -77,8 +42,9 @@
         `export HF_DATASETS_CACHE=<cachefolderpath>` <br>
         `source ~/.bashrc`
 
-## progress experiments
-1. be sure about existance of your data 
+## Conduct/Repeat the experiments
+
+1. be sure about existence of your data 
     - `(java/final/json/(test,train,valid))` in `dataset/java_dataset  ` folder
     - `(python/final/json/(test,train,valid))` in `dataset/python_dataset  ` folder
 2. from `experiment_script` folder run `python decompress.py --java --python` -> extract data from zip to json files stor in `dataset/decompressedData`
@@ -140,3 +106,35 @@
             - you can print the samples and show the evaluation in `evaluation.ipynb`
 
         - in `visualization` folder run `python generate_seq_diagram.py` or run `python testcase_draw.py` to plot testcases to show it visualy
+
+## notes for special cases spoted and how has been solved:
+
+- everywhere, where you find (<b> seq </b>) this is a sequence diagram in JSON and (<b>seqs</b>) this is a list of sequence for list of functions
+
+- in seq_drawer we added replacing ',' between function parameters with ' -' because the api cause error with having ',' in object name but we keep it sequence json
+
+- python seq plot has problem in plot in case eg:{'a':"1", 'b': 2}.items() but seq in correct
+
+- AST-unparsable samples seq_generation return special case of seq which is empty to be excluded in prapareData
+
+- not possible to determine from ast which kw has default known kw args come after *args{
+    ```
+    def example_function(pos_only1, pos_only2, /, args1, args2, args3, *args, kw1, kw2=None, kw3, kw4, **kwargs):
+    ```
+    }
+
+- special case: (args = defaultvalue => args=defaultvalue) fixed with regex
+
+- exclude title element from seq from evaluation: (fixed for python by pass function code and extract the exact function def)
+
+- exclude functions of subfunction call: excluded in prepare data using function defined in generator class
+
+- special casse in python seq string element we have "str\"str" need to be changed to "str'str"
+
+- newInstance in java is changed (from old version) to have the variable name included / we don't have this case in python since we can not distinguish between function call and object creation
+    ```
+    in java we create variable by type var; or type var = new tyep(); or type var = fun();
+    in python we don't add type before the variable so the model doesn't detect newInstance for example var = fun()
+    ```
+
+- cleanseq : is a case we train and test the model in a certain situation which is: we remove all unused scopedVariable elements from sequence <b> this one has been entairly excluded from seq, so no need to use this args any more </b>
