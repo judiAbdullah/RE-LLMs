@@ -42,7 +42,7 @@ The project contains the following packages:
 
 ## Download Data
 
-Download the [datasets and a finetuned version]((https://zenodo.org/records/16755656)) of codet5-small from Zenodo and place the data in the respective folders. 
+Download the [datasets and a finetuned version](https://zenodo.org/records/16755656) of codet5-small from Zenodo and place the data in the respective folders. 
 
 
 ## Requirements
@@ -164,7 +164,7 @@ For Linux perform the following:
         
         __Please note__: This requires an NVIDIA driver to be installed on which the experiment is run. 
     
-5. compute the metrics _exact match_ and _CodeBLEU_:
+5. Compute the metrics __exact match__ and __CodeBLEU__:
         
     - evaluation (chose from below what you need) make sure the `CodeBLEU` folder exist in `experiment_scripts` folder
         
@@ -184,7 +184,7 @@ For Linux perform the following:
         
     the generated data will be stored in `seq_dataset_filtered_eval`
     
-6. compute the __structural similarity__ 
+6. Compute the __structural similarity__ 
         
     - to generate the evaluation data and compute the evaluation score:
         
@@ -204,7 +204,7 @@ For Linux perform the following:
         
         - generated data will be stored in `seq_dataset_filtered_evaluated`
 
-7. optional:
+7. Optional steps:
         
     - run `python evaluate_store.py` to store evaluation as panda dataframe to visualize it easly
     
