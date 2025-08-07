@@ -148,14 +148,21 @@ For Linux perform the following:
 4. Conduct the training
     1. prepare the dataset by running the script [prepare_dataset.py](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/prepare_dataset.py):
 
-        `python prepare_dataset.py --java --python` 
+        ```sh 
+        python prepare_dataset.py --java --python
+        ``` 
         
         This creates the filtered set of sequence diagrams and prepares the data for training and testing the LLM.
         
         Please note: some samples are unparsable because of syntax error those will be excluded
     
     2. perform the fintuning with the script [finetune_codeT5.py](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/finetune_codeT5.py):
-         `python finetune_codeT5.py --train` 
+        
+        ```sh
+        python finetune_codeT5.py --train
+        ``` 
+        
+        __Please note__: This requires an NVIDIA driver to be installed on which the experiment is run. 
     
 5. compute the metrics _exact match_ and _CodeBLEU_:
         
@@ -181,9 +188,9 @@ For Linux perform the following:
         
     - to generate the evaluation data and compute the evaluation score:
         
-    ```sh 
-    python specify_evaluation.py --generate --compute
-    ``` 
+        ```sh 
+        python specify_evaluation.py --generate --compute
+        ``` 
     
     - to compute only the evaluation score if you have the data already generated, run
 
