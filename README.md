@@ -1,8 +1,19 @@
-# LLM-Based Re-Engineering of Sequence Diagrams
+# Evaluation Artifact for LLM-Based Re-Engineering of Sequence Diagrams
 
 ## Overview
 
-This repository contains the setup for our study of the generalization capabilities of  LLMs finetuned on reverse engineering tasks.
+This repository contains the setup for our study _On the Generalization Capabilities of LLMs for Reverse Engineering Sequence Diagrams_ which is accepted at the 7th Workshop on Artificial Intelligence and Model-driven Engineering ([MDE Intelligence](https://mde-intelligence.github.io/)). 
+In the paper, we finetune the LLM CodeT5 on the task of generating a sequence diagram representation for Java. 
+We examine the transfer capabilities of the finetuned model by giving it the same task with Python methods as input.
+
+This repository comprises all the source code used to  
+
+- create the grund-truth dataset for Java and Python
+- finetune codet5-small
+- extract sequence diagrams for Python
+- measure the similarity of a generated and a groundtruth diagram
+- visualize sequence diagrams in dot-format and the evaluation results
+
 
 __Authors__: Judi Abdullah, Sandra Greiner
 
