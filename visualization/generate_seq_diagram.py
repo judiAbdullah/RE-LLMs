@@ -3,7 +3,6 @@ from transformers import (
     RobertaTokenizer,
     T5ForConditionalGeneration,
 )
-import torch
 from seq_drawer import *
 from dotenv import dotenv_values
 import os
@@ -21,34 +20,6 @@ sys.path.append(parent_dir)
 config = dotenv_values("../.env")
 image_size=(1000, 1000)
 
-
-
-def fix_json(seq):
-    def matchBracket(current, stack):
-        if ((current == ']' and stack == '[') or 
-            (current == '}' and stack == '{')):
-            return True
-        return False
-    def getClose(stack):
-        if stack == '[':
-            return ']'
-        elif stack == '{':
-            return '}'
-    stack = []
-    for i, c in enumerate(list(seq)):
-        if c == "[":
-            stack.append("[")
-        elif c == "{":
-            stack.append("{") 
-        elif c == "]" or c == "}":
-            if len(stack) <= 0:
-                raise 'error in open bracket'
-            if matchBracket(c, stack[-1]):
-                stack.pop()
-    while len(stack) > 0:
-        seq += getClose(stack[-1])
-        stack.pop()                    
-    return seq
 
 
 

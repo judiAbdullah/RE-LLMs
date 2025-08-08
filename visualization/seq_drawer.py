@@ -3,7 +3,6 @@ import json
 
 import cairosvg
 import asyncio
-import time
 import json
 import xml.etree.ElementTree as ET
 from playwright.async_api import async_playwright
@@ -127,34 +126,6 @@ class SequenceDiagram:
         svg = ET.tostring(elt, encoding="utf-8")
 
         return svg
-    
-    
-    def fix_json(self, seq):
-        def matchBracket(current, stack):
-            if ((current == ']' and stack == '[') or 
-                (current == '}' and stack == '{')):
-                return True
-            return False
-        def getClose(stack):
-            if stack == '[':
-                return ']'
-            elif stack == '{':
-                return '}'
-        stack = []
-        for i, c in enumerate(list(seq)):
-            if c == "[":
-                stack.append("[")
-            elif c == "{":
-                stack.append("{") 
-            elif c == "]" or c == "}":
-                if len(stack) <= 0:
-                    raise 'error in open bracket'
-                if matchBracket(c, stack[-1]):
-                    stack.pop()
-        while len(stack) > 0:
-            seq += getClose(stack[-1])
-            stack.pop()                    
-        return seq
 
 
     def replace_alt(self, elt):

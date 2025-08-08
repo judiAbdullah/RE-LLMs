@@ -1,5 +1,4 @@
 import xml.etree.ElementTree as ET
-import traceback
 import re
 
 from ..process_xmi import *

@@ -1,7 +1,6 @@
 import re
 import sys
 from pathlib import Path
-import traceback
 parent_parent_folder = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_parent_folder))
 
