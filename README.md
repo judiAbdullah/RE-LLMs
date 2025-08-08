@@ -3,15 +3,17 @@
 ## Overview
 
 This repository contains the setup for our study _On the Generalization Capabilities of LLMs for Reverse Engineering Sequence Diagrams_ which is accepted at the 7th Workshop on Artificial Intelligence and Model-driven Engineering ([MDE Intelligence](https://mde-intelligence.github.io/)). 
-In the paper, we finetune the LLM CodeT5 on the task of generating a sequence diagram representation for Java. 
-We examine the transfer capabilities of the finetuned model by giving it the same task with Python methods as input.
+
+In our study, we use the LLM [CodeT5](https://github.com/salesforce/CodeT5), a model pretrained on source-code related tasks. 
+First, we fintune it on the task of generating a sequence diagram representations for Java methods. 
+Second, we examine the transfer capabilities of the finetuned model by giving it the same task with Python methods as input.
 
 This repository comprises all the source code used to  
 
 - create the grund-truth dataset for Java and Python
-- finetune codet5-small
-- extract sequence diagrams for Python
-- measure the similarity of a generated and a groundtruth diagram
+- finetune [codet5-small](https://huggingface.co/Salesforce/codet5-small)
+- generate sequence diagrams for Python with the finetuned model
+- measure the similarity of the generated with the groundtruth sequence diagram
 - visualize sequence diagrams in dot-format and the evaluation results
 
 
@@ -30,10 +32,11 @@ The project contains the following packages:
 - [modelsData](https://github.com/judiAbdullah/RE-LLMs/tree/main/modelsData/seq_codet5_finetuned) contains the trained model checkpoints folder and also finetuned folder starting experiment this folder should be empty after traing we will have both folder created by training script
 
 - [seq_generator_models](https://github.com/judiAbdullah/RE-LLMs/tree/main/seq_generator_models)
-    - `python_model` folder where we have python sequence generator
-    - `java_model` folder where we have java sequence generator
+    - `python_model` folder which stores the Python sequence generator
+    - `java_model` folder which stores the Java sequence generator
 
-- [experiment_scripts](https://github.com/judiAbdullah/RE-LLMs/tree/main/experiment_scripts) contains all scripts that are needed to conduct our experiment
+- [experiment_scripts](https://github.com/judiAbdullah/RE-LLMs/tree/main/experiment_scripts) 
+    contains all scripts that are needed to conduct our experiment and additional ones we used to test the finetuned model with individual methods and visualize the result
 
 - [visualization](https://github.com/judiAbdullah/RE-LLMs/tree/main/visualization) contains scripts to plot sequence diagrams in the dot format
 
@@ -42,13 +45,13 @@ The project contains the following packages:
 
 ## Download Data
 
-Download the [datasets and a finetuned version](https://zenodo.org/records/16755656) of codet5-small from Zenodo and place the data in the respective folders. 
+Download the datasets and a finetuned version of codet5-small from [Zenodo](https://zenodo.org/records/16755656) and place the data in the respective folders. 
 
 
 ## Requirements
 
 This repository contains a Java project to transform Java methods into XML-files that hold their AST and Python scripts to perform the remaining experiment. 
-Thus, the full experiment depends on Maven and Python libraries.
+Thus, the full experiment depends on Maven and Python libraries. 
 
 When using Conda you can find all necessary libraries in
 - [environment.yml](https://github.com/judiAbdullah/RE-LLMs/blob/main/environment.yml) describes all necessary libs for running experiment. Add them to your environment in any way you prefere or use it to create a new environment (for conda environment)
@@ -101,7 +104,7 @@ For Linux perform the following:
     - `export JAVA_HOME=~/java/jdk-21.0.5`
     - `export PATH=$JAVA_HOME/bin:$PATH`
     - `source ~/.bashrc`
-    - `java -version`
+    - verify that Java is available on the class path `java -version`
 
 3) Download the sources for Maven
 
@@ -114,16 +117,17 @@ For Linux perform the following:
     - `export MAVEN_HOME=~/maven/apache-maven-3.9.6`
     - `export PATH=$MAVEN_HOME/bin:$PATH`
     - `source ~/.bashrc`
-    - `mvn -version`
+    - verify that Maven is available on the class path `mvn -version`
 
 
 ## Run the experiment
 
-1. Ensure that the following folders are not empty (and contain the necessary data for the experiment) 
+1. Ensure that the following folders are not empty and contain the necessary data for the experiment. You can download the contents from [Zenodo](https://zenodo.org/records/16755656)
+
     - [dataset/java_dataset](https://github.com/judiAbdullah/RE-LLMs/tree/main/dataset/java_dataset) needs to contain `(java/final/json/(test,train,valid))`
     - [dataset/python_dataset](https://github.com/judiAbdullah/RE-LLMs/tree/main/dataset/python_dataset) shall contain `(python/final/json/(test,train,valid))`
 
-2. Run the script [decompress](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/decompress.py) from the experiements_scripts directory
+2. Run the script [decompress.py](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/decompress.py) from the experiements_scripts directory
 
     `python decompress.py --java --python` 
 
@@ -163,6 +167,8 @@ For Linux perform the following:
         ``` 
         
         __Please note__: This requires an NVIDIA driver to be installed on which the experiment is run. 
+
+        The finetuned model is also available on [Zenodo](https://zenodo.org/records/16755656).
     
 5. Compute the metrics __exact match__ and __CodeBLEU__:
         
@@ -182,7 +188,7 @@ For Linux perform the following:
             
             - to remove (title element) from evaluation add `--titleremove` you can add it only with `--compute` if you have `--generate` done
         
-    the generated data will be stored in `seq_dataset_filtered_eval`
+    The generated data will be stored in the folder `seq_dataset_filtered_eval`.
     
 6. Compute the __structural similarity__ 
         
@@ -198,26 +204,29 @@ For Linux perform the following:
         python specify_evaluation.py --compute
         ```
 
-        - posible to specify which data to use `--pythondata` or `--javadata`
+        - you can specify which data to use `--pythondata` or `--javadata`
         
         - to add fixing json bracket if exist and solvable add `--fixjson`
         
-        - generated data will be stored in `seq_dataset_filtered_evaluated`
+        The generated data will be stored in `seq_dataset_filtered_evaluated`.
 
 7. Optional steps:
         
-    - run `python evaluate_store.py` to store evaluation as panda dataframe to visualize it easly
+    - run [`evaluate_store.py`](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/evaluate_store.py) to store evaluation as panda dataframe to visualize it easly
     
-    - run show data to see samples of your data sets
+    - run [`showdata.py`](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/showdata.py) to see samples of your data sets
+        
         - `python showdata.py --dataset filteredDataJava --samples 5`
         - `python showdata.py --dataset filteredDataPython --samples 5`
         - `python showdata.py --dataset evalDatasetpathJava --samples 5`
         - `python showdata.py --dataset evalDatasetpathPython --samples 5`
-    - run `python testcases.py` to evaluate the model using hand writen test cases
+
+    - run [`testcases.py`](https://github.com/judiAbdullah/RE-LLMs/blob/main/experiment_scripts/testcases.py) to create sequence diagrams with the finetuned model using hand writen test cases
+        
         - the result will be stored in `dataset/testcase.csv`
         - you can print the samples and show the evaluation in `evaluation.ipynb`
 
-    - in `visualization` folder run `python generate_seq_diagram.py` or run `python testcase_draw.py` to plot testcases to show it visualy
+    - in `visualization` folder run `python generate_seq_diagram.py` or run `python testcase_draw.py` to plot testcases to show them as diagrams
 
 
 ## Some Issues and how they have been solved:
