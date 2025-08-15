@@ -8,7 +8,7 @@ In our study, we use the LLM [CodeT5](https://github.com/salesforce/CodeT5), a m
 First, we fintune it on the task of generating a sequence diagram representations for Java methods. 
 Second, we examine the transfer capabilities of the finetuned model by giving it the same task with Python methods as input.
 
-This repository comprises all the source code used to  
+This repository comprises the source code used to  
 
 - create the grund-truth dataset for Java and Python
 - finetune [codet5-small](https://huggingface.co/Salesforce/codet5-small)
@@ -25,11 +25,11 @@ The project contains the following packages:
 
 - [JavaParse](https://github.com/judiAbdullah/RE-LLMs/tree/main/JavaParse) is a Netbeans project that takes Java source code, parses it and transforms stores it in XML format. The XML files are transformed into JSON with the scripts in [seq_generator_models](https://github.com/judiAbdullah/RE-LLMs/tree/main/seq_generator_models)
 
-- [dataset](https://github.com/judiAbdullah/RE-LLMs/tree/main/dataset) contains all data needed to start experiment and also the new generated data will be stored here
-    - `java_dataset` in startion experiment should include `java/final/jsonl` which will have all data split in .json form
-    - `python_dataset` in startion experiment should include `python/final/jsonl` which will have all data split in .json form
+- [dataset](https://github.com/judiAbdullah/RE-LLMs/tree/main/dataset) shll contain the data needed to start the experiment; also the generated data will be stored there
+    - `java_dataset` when starting the experiment, it should include `java/final/jsonl` which will have all data split in .json form
+    - `python_dataset` when starting the experiment, it should include `python/final/jsonl` which also splits the data in .json form
 
-- [modelsData](https://github.com/judiAbdullah/RE-LLMs/tree/main/modelsData/seq_codet5_finetuned) contains the trained model checkpoints folder and also finetuned folder starting experiment this folder should be empty after traing we will have both folder created by training script
+- [modelsData](https://github.com/judiAbdullah/RE-LLMs/tree/main/modelsData) shall contain the trained model checkpoints folder and also finetuned folder starting experiment this folder should be empty after traing we will have both folder created by training script
 
 - [seq_generator_models](https://github.com/judiAbdullah/RE-LLMs/tree/main/seq_generator_models)
     - `python_model` folder which stores the Python sequence generator
@@ -43,7 +43,7 @@ The project contains the following packages:
 
 # Conduct the experiments
 
-## Download Data
+## Prerequisite: Download Data
 
 Download the datasets and a finetuned version of codet5-small from [Zenodo](https://zenodo.org/records/16755656) and place the data in the respective folders. 
 
